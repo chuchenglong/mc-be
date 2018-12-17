@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mc.mapper.WhiteInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.mc.model.WhiteInfo" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="white_type" property="whiteType" jdbcType="VARCHAR" />
+    <result column="white_value" property="whiteValue" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="selectWhiteListByType" parameterType="string" resultType="string">
+    select white_value from t_white_info where white_type = #{whiteType}
+  </select>
+</mapper>

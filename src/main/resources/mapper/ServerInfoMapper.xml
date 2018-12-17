@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mc.mapper.ServerInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.mc.model.ServerInfo" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="server_url" property="serverUrl" jdbcType="VARCHAR" />
+    <result column="server_name" property="serverName" jdbcType="VARCHAR" />
+    <result column="server_type" property="serverType" jdbcType="VARCHAR" />
+    <result column="biz_type" property="bizType" jdbcType="VARCHAR" />
+    <result column="server_mark" property="serverMark" jdbcType="VARCHAR" />
+    <result column="server_status" property="serverStatus" jdbcType="VARCHAR" />
+    <result column="server_des" property="serverDes" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="selectServerByUserIdAndUri" resultMap="BaseResultMap">
+    select t3.id, t3.server_url, t3.server_name, t3.server_type, t3.biz_type, t3.server_mark, t3.server_status, t3.server_des
+    from t_user_role t1, t_role_server t2, t_server_info t3
+    where t1.role_type = t2.role_type and t2.server_id = t3.id and t1.user_id = #{userId} and t3.server_status = 'ss_100' and t3.server_url = #{uri}
+  </select>
+
+  <select id="selectNormalServerInfoCountByServerUrl" parameterType="string" resultType="int">
+    select count(1) from t_server_info where server_url = #{serverUrl} and server_status = 'ss_100'
+  </select>
+
+  <select id="selectServerInfoCountByServerUrl" parameterType="string" resultType="int">
+    select count(1) from t_server_info where server_url = #{serverUrl}
+  </select>
+
+  <update id="updateServerInfoById" parameterType="com.mc.model.ServerInfo">
+    update t_server_info set server_name = #{serverName}, server_type = #{serverType}, biz_type = #{bizType}, server_mark = #{serverMark}, server_des = #{serverDes} where id = #{id}
+  </update>
+
+  <update id="updateServerStatusById">
+    update t_server_info set server_status = #{serverStatus} where id = #{id}
+  </update>
+</mapper>

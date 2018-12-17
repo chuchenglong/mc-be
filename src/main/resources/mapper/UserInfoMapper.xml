@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mc.mapper.UserInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.mc.model.UserInfo" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="fail_times" property="failTimes" jdbcType="INTEGER" />
+    <result column="user_status" property="userStatus" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <resultMap id="UserResultMap" type="com.mc.vo.UserVo" >
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="user_status" property="userStatus" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="cert_type" property="certType" jdbcType="VARCHAR" />
+    <result column="cert_no" property="certNo" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="alias" property="alias" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="VARCHAR" />
+    <result column="birth_date" property="birthDate" jdbcType="TIMESTAMP" />
+    <result column="brief" property="brief" jdbcType="VARCHAR" />
+    <result column="photo" property="photo" jdbcType="VARCHAR" />
+    <result column="marital" property="marital" jdbcType="VARCHAR" />
+    <result column="race" property="race" jdbcType="VARCHAR" />
+    <result column="nationality" property="nationality" jdbcType="VARCHAR" />
+    <result column="domicile" property="domicile" jdbcType="VARCHAR" />
+    <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="selectUserInfoByUsername" parameterType="string" resultMap="BaseResultMap">
+    select id, username, password, fail_times, user_status, create_time from t_user_info where username = #{username}
+  </select>
+
+  <select id="selectUserInfoCountByUsername" parameterType="string" resultType="int">
+    select count(1) from t_user_info where username = #{username}
+  </select>
+
+  <select id="selectUserVoByUserId" parameterType="int" resultMap="UserResultMap">
+    select t1.username, t1.user_status, t1.create_time,
+      t2.cert_type, t2.cert_no, t2.name, t2.phone, t2.email, t2.alias, t2.gender,
+      t2.birth_date, t2.brief, t2.photo, t2.marital, t2.race, t2.nationality, t2.domicile, t4.role_name
+      from t_user_info t1
+    left join t_user_detail t2 on t1.id = t2.user_id
+    left join t_user_role t3 on t1.id = t3.user_id
+    left join t_role_info t4 on t3.role_type = t4.role_type
+    where  t1.id = #{userId}
+  </select>
+
+  <update id="updateFailTimesByUserId">
+    update t_user_info set fail_times = #{times} where id = #{userId}
+  </update>
+
+  <update id="updateUserStatusByUserId">
+    update t_user_info set user_status = #{userStatus} where id = #{userId}
+  </update>
+
+  <update id="updatePasswordByUserId">
+    update t_user_info set password = #{password} where id = #{userId}
+  </update>
+
+</mapper>

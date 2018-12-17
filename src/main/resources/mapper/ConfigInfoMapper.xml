@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mc.mapper.ConfigInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.mc.model.ConfigInfo" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="config_code" property="configCode" jdbcType="VARCHAR" />
+    <result column="config_name" property="configName" jdbcType="VARCHAR" />
+    <result column="config_value" property="configValue" jdbcType="VARCHAR" />
+    <result column="config_type" property="configType" jdbcType="VARCHAR" />
+    <result column="biz_type" property="bizType" jdbcType="VARCHAR" />
+    <result column="config_mark" property="configMark" jdbcType="VARCHAR" />
+    <result column="config_status" property="configStatus" jdbcType="VARCHAR" />
+    <result column="config_des" property="configDes" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="selectValueByCode" parameterType="string" resultType="string">
+    select config_value from t_config_info where config_code = #{configCode} and config_status = 'cs_100'
+  </select>
+
+  <select id="selectEnableConfigInfo" resultMap="BaseResultMap">
+    select id,config_code,config_name,config_value,config_type,biz_type,config_mark,config_status,config_des from t_config_info where config_status = 'cs_100'
+  </select>
+
+  <select id="selectConfigInfoCountByConfigCode" parameterType="string" resultType="int">
+    select count(1) from t_config_info where config_code = #{configCode}
+  </select>
+
+  <update id="updateConfigInfoById" parameterType="com.mc.model.ConfigInfo">
+    update t_config_info set config_name = #{configName}, config_value = #{configValue}, config_type = #{configType}, biz_type = #{bizType}, config_mark = #{configMark}, config_des = #{configDes} where id = #{id}
+  </update>
+
+  <update id="updateConfigStatusById">
+    update t_config_info set config_status = #{configStatus} where id = #{id}
+  </update>
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mc.mapper.OptRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.mc.model.OptRecord" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="opt_url" property="optUrl" jdbcType="VARCHAR" />
+    <result column="opt_time" property="optTime" jdbcType="TIMESTAMP" />
+    <result column="opt_status" property="optStatus" jdbcType="VARCHAR" />
+    <result column="opt_ip" property="optIp" jdbcType="VARCHAR" />
+    <result column="opt_content" property="optContent" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="selectOptRecordListByCondition" parameterType="com.mc.vo.OptVo" resultMap="BaseResultMap">
+    select id, user_id, opt_url, opt_time, opt_status, opt_ip, opt_content from t_opt_record limit 10
+  </select>
+</mapper>

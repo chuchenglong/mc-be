@@ -1,0 +1,58 @@
+server:
+  port: 8001
+
+spring:
+  mail:
+    default-encoding: UTF-8
+    host: smtp.qq.com
+    username: XXXXXXXX
+    password: XXXXXXXXX
+    properties:
+      mail:
+        smtp:
+          timeout: 5000
+          auth: true
+          starttls:
+            enable: true
+            required: true
+  datasource:
+    first:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/chuchenglong?allowMultiQueries=true
+      username: root
+      password: root
+      max-active: 10
+      max-idle: 8
+      min-idle: 5
+      max-wait: 60000
+  task:
+    pool:
+      corePoolSize: 10
+      maxPoolSize: 50
+      keepAliveSeconds: 300
+      queueCapacity: 1000
+      prefix: mc-be-
+  redis:
+    database: 0
+    ip: 127.0.0.1
+    port: 6379
+    timeout: 0
+    pool:
+      max-active: 8
+      max-idle: 8
+      max-wait: -1
+      min-idle: 0
+
+mybatis:
+  type-aliases-package: com.mc.model
+  mapper-locations: classpath:mapper/*.xml
+
+multipart:
+  maxFileSize: 50Mb
+  maxRequestSize: 60Mb
+
+file:
+  download-path: http://localhost:8001/image/
+  upload-path: D:\work\chuchenglong\mc-be\src\main\resources\static\image\
+  max-size: 3
+  support-suffix: .jpg&.png
