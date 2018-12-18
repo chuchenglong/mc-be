@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -83,6 +85,13 @@ public class UserController {
         return McResult.newSuccess(null);
     }
 
+    @RequestMapping(value = "/getUserPageList", method = RequestMethod.POST)
+    public McResult getUserPageList(@RequestBody UserConditionVo userConditionVo) throws McBusinessException {
+        // 查询用户基本信息
+        PageVo pageVo = userService.getUserVoPageListByCondition(userConditionVo);
+        // 返回成功结果信息
+        return McResult.newSuccess(pageVo);
+    }
 
 
 }

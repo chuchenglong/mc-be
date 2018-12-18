@@ -65,4 +65,42 @@
     update t_user_info set password = #{password} where id = #{userId}
   </update>
 
+  <select id="getUserVoPageListByCondition" parameterType="com.mc.vo.UserConditionVo" resultMap="UserResultMap">
+    select t1.username, t1.user_status, t1.create_time,
+      t2.cert_type, t2.cert_no, t2.name, t2.phone, t2.email, t2.alias, t2.gender,
+      t2.birth_date, t2.brief, t2.photo, t2.marital, t2.race, t2.nationality, t2.domicile, t4.role_name
+      from t_user_info t1
+    inner join t_user_detail t2 on t1.id = t2.user_id
+    <if test="phone != null and phone != '' ">
+      and t2.phone like concat('%', #{phone}, '%')
+    </if>
+    left join t_user_role t3 on t1.id = t3.user_id
+    left join t_role_info t4 on t3.role_type = t4.role_type
+    where  1=1
+    <if test="username != null and username != '' ">
+      and t1.username like concat('%', #{username}, '%')
+    </if>
+    <if test="userStatus != null and userStatus != '' ">
+      and t1.user_status = #{userStatus}
+    </if>
+    <if test="pageNo != 0 and pageSize != 0 ">
+      limit #{offset}, #{pageSize}
+    </if>
+  </select>
+
+  <select id="getUserVoPageListCountByCondition" parameterType="com.mc.vo.UserConditionVo" resultType="int">
+    select count(1)
+    from t_user_info t1
+    inner join t_user_detail t2 on t1.id = t2.user_id
+    <if test="phone != null and phone != '' ">
+      and t2.phone like concat('%', #{phone}, '%')
+    </if>
+    where  1=1
+    <if test="username != null and username != '' ">
+      and t1.username like concat('%', #{username}, '%')
+    </if>
+    <if test="userStatus != null and userStatus != '' ">
+      and t1.user_status = #{userStatus}
+    </if>
+  </select>
 </mapper>

@@ -88,4 +88,10 @@ public class SelectorController {
         return McResult.newSuccess(ServerStatusEnum.getAll());
     }
 
+    @RequestMapping(value = "/getUserStatus", method = RequestMethod.POST)
+    public McResult getUserStatus() throws McBusinessException {
+        // 返回成功结果信息
+        return McResult.newSuccess(UserStatusEnum.getAll());
+    }
+
 }

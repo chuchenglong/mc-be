@@ -15,10 +15,7 @@ import com.mc.system.McBusinessException;
 import com.mc.system.McLog;
 import com.mc.util.RandomUtils;
 import com.mc.util.StringUtils;
-import com.mc.vo.HomeVo;
-import com.mc.vo.LoginVo;
-import com.mc.vo.RegisterVo;
-import com.mc.vo.UserVo;
+import com.mc.vo.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +23,9 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserService extends BaseService {
@@ -295,4 +295,23 @@ public class UserService extends BaseService {
     public void updatePasswordByUserId(int userId, String password) {
         userInfoMapper.updatePasswordByUserId(userId, password);
     }
+
+    public PageVo getUserVoPageListByCondition(UserConditionVo userConditionVo) throws McBusinessException {
+        // 查询内容
+        List<UserVo> list = userInfoMapper.getUserVoPageListByCondition(userConditionVo);
+        for (int i = 0; i < list.size(); i++) {
+            list.get(i).setUserStatusDis(UserStatusEnum.get(list.get(i).getUserStatus()));
+            list.get(i).setCertTypeDis(CertTypeEnum.get(list.get(i).getCertType()));
+            list.get(i).setGenderDis(GenderEnum.get(list.get(i).getGender()));
+            list.get(i).setMaritalDis(MaritalEnum.get(list.get(i).getMarital()));
+            list.get(i).setNationalityDis(NationalityEnum.get(list.get(i).getNationality()));
+            list.get(i).setRaceDis(RaceEnum.get(list.get(i).getRace()));
+        }
+        // 查询总条数
+        int total = userInfoMapper.getUserVoPageListCountByCondition(userConditionVo);
+
+        return PageVo.getResult(list, total);
+    }
+
+
 }

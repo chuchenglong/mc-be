@@ -34,6 +34,7 @@ public enum TipsConstant {
     FILE_OVERSIZED_3M("EUSER10004", "文件过大, 不能超过3M！"),
     UNSUPPORT_FILE("EUSER10004", "文件格式不正确！"),
     SYSTEM_ERROR("ERROR10000", "系统异常，请稍后再试！"),
+    PAGE_PARAM_ERROR("ERROR10000", "分页内容不合法！"),
     NULL_WHITE_LIST("ERROR10000", "不存在此白名单！"),
     NULL_SERVER("ERROR10000", "不存在此服务！"),
     WHITE_LIST_EXISTS("ERROR10000", "此白名单已存在！"),
