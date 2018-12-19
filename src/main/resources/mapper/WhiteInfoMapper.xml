@@ -13,4 +13,8 @@
   <select id="selectWhiteListByType" parameterType="string" resultType="string">
     select white_value from t_white_info where white_type = #{whiteType}
   </select>
+
+  <select id="selectWhiteInfoListByType" parameterType="string" resultMap="BaseResultMap">
+    select id,white_type,white_value from t_white_info where white_type = #{whiteType}
+  </select>
 </mapper>

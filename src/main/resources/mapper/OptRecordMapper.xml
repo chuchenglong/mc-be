@@ -15,6 +15,34 @@
   </resultMap>
 
   <select id="selectOptRecordListByCondition" parameterType="com.mc.vo.OptVo" resultMap="BaseResultMap">
-    select id, user_id, opt_url, opt_time, opt_status, opt_ip, opt_content from t_opt_record limit 10
+    select id, user_id, opt_url, opt_time, opt_status, opt_ip, opt_content from t_opt_record
+    where  1=1
+    <if test="userId != 0">
+      and user_id = #{userId}
+    </if>
+    <if test="optUrl != null and optUrl != '' ">
+      and opt_url like concat('%', #{optUrl}, '%')
+    </if>
+    <if test="optStatus != null and optStatus != '' ">
+      and opt_status = #{optStatus}
+    </if>
+    <if test="pageNo != 0 and pageSize != 0 ">
+      limit #{offset}, #{pageSize}
+    </if>
   </select>
+
+  <select id="selectOptRecordListCountByCondition" parameterType="com.mc.vo.OptVo" resultType="int">
+    select count(1) from t_opt_record
+    where  1=1
+    <if test="userId != null and userId != '' ">
+      and user_id = #{userId}
+    </if>
+    <if test="optUrl != null and optUrl != '' ">
+      and opt_url like concat('%', #{optUrl}, '%')
+    </if>
+    <if test="optStatus != null and optStatus != '' ">
+      and opt_status = #{optStatus}
+    </if>
+  </select>
+
 </mapper>

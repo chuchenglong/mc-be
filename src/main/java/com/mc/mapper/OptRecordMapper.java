@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface OptRecordMapper extends QkMapperConfig<OptRecord> {
     List<OptRecord> selectOptRecordListByCondition(OptVo optVo);
+
+    int selectOptRecordListCountByCondition(OptVo optVo);
 }

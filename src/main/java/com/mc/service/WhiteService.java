@@ -27,8 +27,8 @@ public class WhiteService {
         return false;
     }
 
-    public List<WhiteInfo> getWhiteInfoList() {
-        return whiteInfoMapper.selectAll();
+    public List<WhiteInfo> getWhiteInfoList(String whiteType) {
+        return whiteInfoMapper.selectWhiteInfoListByType(whiteType);
     }
 
     public void checkWhiteInfoListIsUsed(WhiteInfo whiteInfo) throws McBusinessException {

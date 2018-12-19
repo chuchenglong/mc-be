@@ -19,8 +19,8 @@ public class WhiteController {
     private WhiteService whiteService;
 
     @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public McResult getWhiteInfoList() throws McBusinessException {
-        List<WhiteInfo> list = whiteService.getWhiteInfoList();
+    public McResult getWhiteInfoList(@RequestBody WhiteInfo whiteInfo) throws McBusinessException {
+        List<WhiteInfo> list = whiteService.getWhiteInfoList(whiteInfo.getWhiteType());
         // 返回成功结果信息
         return McResult.newSuccess(list);
     }

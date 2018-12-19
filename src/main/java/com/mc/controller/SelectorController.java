@@ -94,4 +94,10 @@ public class SelectorController {
         return McResult.newSuccess(UserStatusEnum.getAll());
     }
 
+    @RequestMapping(value = "/getOptStatus", method = RequestMethod.POST)
+    public McResult getOptStatus() throws McBusinessException {
+        // 返回成功结果信息
+        return McResult.newSuccess(OptStatusEnum.getAll());
+    }
+
 }

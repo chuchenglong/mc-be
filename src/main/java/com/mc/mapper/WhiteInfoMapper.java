@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface WhiteInfoMapper extends QkMapperConfig<WhiteInfo> {
     List<String> selectWhiteListByType(String whiteType);
+
+    List<WhiteInfo> selectWhiteInfoListByType(String whiteType);
 }
