@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mc.mapper.AccountOutsideMapper" >
+  <resultMap id="BaseResultMap" type="com.mc.model.AccountOutside" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="rel_account_id" property="relAccountId" jdbcType="INTEGER" />
+    <result column="account_no" property="accountNo" jdbcType="VARCHAR" />
+    <result column="login_password" property="loginPassword" jdbcType="VARCHAR" />
+    <result column="query_password" property="queryPassword" jdbcType="VARCHAR" />
+    <result column="transfer_password" property="transferPassword" jdbcType="VARCHAR" />
+    <result column="account_type" property="accountType" jdbcType="VARCHAR" />
+    <result column="account_mark" property="accountMark" jdbcType="VARCHAR" />
+    <result column="product" property="product" jdbcType="VARCHAR" />
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="cert_type" property="certType" jdbcType="VARCHAR" />
+    <result column="cert_no" property="certNo" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="question1" property="question1" jdbcType="VARCHAR" />
+    <result column="answer1" property="answer1" jdbcType="VARCHAR" />
+    <result column="question2" property="question2" jdbcType="VARCHAR" />
+    <result column="answer2" property="answer2" jdbcType="VARCHAR" />
+    <result column="question3" property="question3" jdbcType="VARCHAR" />
+    <result column="answer3" property="answer3" jdbcType="VARCHAR" />
+    <result column="account_used" property="accountUsed" jdbcType="VARCHAR" />
+    <result column="account_des" property="accountDes" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <select id="selectAccountOutsidePageListByCondition" parameterType="com.mc.vo.AccountOutsideVo" resultMap="BaseResultMap">
+    select id, user_id, rel_account_id, account_no, login_password, query_password, transfer_password, account_type, account_mark,
+    product, company, cert_type, cert_no, name, phone, email, question1, answer1, question2, answer2, question3, answer3, account_used, account_des, create_time from t_account_outside
+    where 1=1
+    <if test="company != null and company != '' ">
+      and company = #{company}
+    </if>
+    <if test="product != null and product != '' ">
+      and product = #{product}
+    </if>
+    <if test="accountType != null and accountType != '' ">
+      and account_type = #{accountType}
+    </if>
+    <if test="accountNo != null and accountNo != '' ">
+      and account_no like concat('%', #{accountNo}, '%')
+    </if>
+    <if test="pageNo != 0 and pageSize != 0 ">
+      limit #{offset}, #{pageSize}
+    </if>
+  </select>
+
+  <select id="selectAccountOutsidePageListCountByCondition" parameterType="com.mc.vo.AccountOutsideVo" resultType="int">
+    select count(1) from t_account_outside
+    where 1=1
+    <if test="company != null and company != '' ">
+      and company = #{company}
+    </if>
+    <if test="product != null and product != '' ">
+      and product = #{product}
+    </if>
+    <if test="accountType != null and accountType != '' ">
+      and account_type = #{accountType}
+    </if>
+    <if test="accountNo != null and accountNo != '' ">
+      and account_no like concat('%', #{accountNo}, '%')
+    </if>
+  </select>
+
+  <select id="selectAccountOutsideCountByCondition" parameterType="com.mc.model.AccountOutside" resultType="int">
+    select count(1) from t_account_outside where company = #{company} and product = #{product} and account_no = #{accountNo} and rel_account_id = #{relAccountId}
+  </select>
+
+  <update id="updateAccountOutsideById" parameterType="com.mc.model.AccountOutside">
+    update t_account_outside set login_password = #{loginPassword}, query_password = #{queryPassword}, transfer_password = #{transferPassword}, account_type = #{accountType}, cert_type = #{certType},
+    cert_no = #{certNo}, name = #{name}, phone = #{phone}, email = #{email}, question1 = #{question1}, answer1 = #{answer1}, question2 = #{question2}, answer2 = #{answer2},
+    question3 = #{question3}, answer3 = #{answer3}, account_used = #{accountUsed}, account_des = #{accountDes} where id = #{id}
+  </update>
+</mapper>

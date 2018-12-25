@@ -146,4 +146,35 @@ create table t_opt_record (
   primary key (id)
 ) engine=InnoDB auto_increment=1 default charset=utf8;
 
-
+-- ----------------------------------------
+-- 三方账户信息表
+-- ----------------------------------------
+drop table if exists t_account_outside;
+create table t_account_outside (
+  id int(11) not null auto_increment comment 'ID',
+  user_id int(8) not null comment '用户ID',
+  rel_account_id int(11) default null comment '关联账号',
+  account_no varchar(50) default null comment '三方账号',
+  login_password varchar(50) default null comment '登录密码',
+  query_password varchar(50) default null comment '查询密码',
+  transfer_password varchar(50) default null comment '支付密码',
+  account_type varchar(10) default null comment '账号类型，AccountTypeEnum',
+  account_mark varchar(10) default null comment '账号标签，AccountMarkEnum',
+  product varchar(50) default null comment '所属产品',
+  company varchar(50) default null comment '所属公司',
+  cert_type varchar(10) default null comment '证件类型，CertTypeEnum',
+  cert_no varchar(50) default null comment '证件号码',
+  name varchar(50) default null comment '个人姓名',
+  phone varchar(20) default null comment '手机号',
+  email varchar(50) default null comment '邮箱',
+  question1 varchar(100) default null comment '安全问题1',
+  answer1 varchar(100) default null comment '安全问题答案1',
+  question2 varchar(100) default null comment '安全问题2',
+  answer2 varchar(100) default null comment '安全问题答案2',
+  question3 varchar(100) default null comment '安全问题3',
+  answer3 varchar(100) default null comment '安全问题答案3',
+  account_used varchar(50) default null comment '用途',
+  account_des varchar(200) default null comment '账号描述',
+  create_time timestamp null default null comment '创建日期',
+  primary key (id)
+) engine=InnoDB auto_increment=1 default charset=utf8;

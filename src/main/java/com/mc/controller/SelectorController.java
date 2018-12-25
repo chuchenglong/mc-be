@@ -100,4 +100,16 @@ public class SelectorController {
         return McResult.newSuccess(OptStatusEnum.getAll());
     }
 
+    @RequestMapping(value = "/getAccountType", method = RequestMethod.POST)
+    public McResult getAccountType() throws McBusinessException {
+        // 返回成功结果信息
+        return McResult.newSuccess(AccountTypeEnum.getAll());
+    }
+
+    @RequestMapping(value = "/getAccountMark", method = RequestMethod.POST)
+    public McResult getAccountMark() throws McBusinessException {
+        // 返回成功结果信息
+        return McResult.newSuccess(AccountMarkEnum.getAll());
+    }
+
 }
