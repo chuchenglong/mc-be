@@ -160,8 +160,8 @@ create table t_account_outside (
   transfer_password varchar(50) default null comment '支付密码',
   account_type varchar(10) default null comment '账号类型，AccountTypeEnum',
   account_mark varchar(10) default null comment '账号标签，AccountMarkEnum',
-  product varchar(50) default null comment '所属产品',
-  company varchar(50) default null comment '所属公司',
+  product int(11) default null comment '所属产品',
+  company int(11) default null comment '所属公司',
   cert_type varchar(10) default null comment '证件类型，CertTypeEnum',
   cert_no varchar(50) default null comment '证件号码',
   name varchar(50) default null comment '个人姓名',
@@ -176,5 +176,25 @@ create table t_account_outside (
   account_used varchar(50) default null comment '用途',
   account_des varchar(200) default null comment '账号描述',
   create_time timestamp null default null comment '创建日期',
+  primary key (id)
+) engine=InnoDB auto_increment=1 default charset=utf8;
+
+
+drop table if exists t_company_info;
+create table t_company_info (
+  id int(11) not null auto_increment comment 'ID',
+  user_id int(8) not null comment '用户ID',
+  company_name varchar(50) default null comment '公司名称',
+  company_des varchar(200) default null comment '公司描述',
+  primary key (id)
+) engine=InnoDB auto_increment=1 default charset=utf8;
+
+drop table if exists t_product_info;
+create table t_product_info (
+  id int(11) not null auto_increment comment 'ID',
+  user_id int(8) not null comment '用户ID',
+  company_id int(11) default null comment '公司ID',
+  product_name varchar(50) default null comment '产品名称',
+  product_des varchar(200) default null comment '公司描述',
   primary key (id)
 ) engine=InnoDB auto_increment=1 default charset=utf8;

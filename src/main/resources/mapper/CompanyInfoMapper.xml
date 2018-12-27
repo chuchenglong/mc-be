@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mc.mapper.CompanyInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.mc.model.CompanyInfo" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="company_des" property="companyDes" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="selectCompanyListByUserId" parameterType="int" resultMap="BaseResultMap">
+    select id, user_id, company_name, company_des from t_company_info where user_id = #{userId}
+  </select>
+
+  <update id="updateCompanyByIdAndUserId" parameterType="com.mc.model.CompanyInfo">
+    update t_company_info set company_des = #{companyDes} where id = #{id} and user_id = #{userId}
+  </update>
+
+  <select id="selectCompanyCountByCompanyNameAndUserId" parameterType="com.mc.model.CompanyInfo" resultType="int">
+    select count(1) from t_company_info where company_name = #{companyName} and user_id = #{userId}
+  </select>
+
+  <delete id="deleteCompanyByIdAndUserId" parameterType="com.mc.model.CompanyInfo">
+    delete from t_company_info where id = #{id} and user_id = #{userId}
+  </delete>
+</mapper>

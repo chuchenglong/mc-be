@@ -44,6 +44,10 @@ public enum TipsConstant {
     CONFIG_EXISTS("ERROR10000", "此code配置已存在！"),
     SERVER_EXISTS("ERROR10000", "此服务已存在！"),
     NULL_CONFIG("ERROR10000", "不存在此配置！"),
+    NULL_COMPANY("EUSER10002", "无可用的公司信息"),
+    USED_COMPANY("EUSER10002", "已添加该公司信息"),
+    NULL_PRODUCT("EUSER10002", "无可用的产品信息"),
+    USED_PRODUCT("EUSER10002", "已添加该产品信息"),
     FAIL_UPLOAD("EUSER10004", "上传失败！")
     ;
 

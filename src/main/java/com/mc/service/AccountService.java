@@ -6,6 +6,7 @@ import com.mc.model.AccountOutside;
 import com.mc.system.McBusinessException;
 import com.mc.util.StringUtils;
 import com.mc.vo.AccountOutsideVo;
+import com.mc.vo.OutsideVo;
 import com.mc.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class AccountService {
     private AccountOutsideMapper accountOutsideMapper;
 
     public PageVo getAccountOutsidePageListByCondition(AccountOutsideVo accountOutsideVo) {
-        List<AccountOutside> list = accountOutsideMapper.selectAccountOutsidePageListByCondition(accountOutsideVo);
+        List<OutsideVo> list = accountOutsideMapper.selectAccountOutsidePageListByCondition(accountOutsideVo);
         int total = accountOutsideMapper.selectAccountOutsidePageListCountByCondition(accountOutsideVo);
         return PageVo.getResult(list, total);
     }

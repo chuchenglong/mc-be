@@ -63,12 +63,12 @@ public class AccountOutside {
     /**
      * 所属产品
      */
-    private String product;
+    private Integer product;
 
     /**
      * 所属公司
      */
-    private String company;
+    private Integer company;
 
     /**
      * 证件类型，CertTypeEnum
@@ -312,7 +312,7 @@ public class AccountOutside {
      *
      * @return product - 所属产品
      */
-    public String getProduct() {
+    public Integer getProduct() {
         return product;
     }
 
@@ -321,7 +321,7 @@ public class AccountOutside {
      *
      * @param product 所属产品
      */
-    public void setProduct(String product) {
+    public void setProduct(Integer product) {
         this.product = product;
     }
 
@@ -330,7 +330,7 @@ public class AccountOutside {
      *
      * @return company - 所属公司
      */
-    public String getCompany() {
+    public Integer getCompany() {
         return company;
     }
 
@@ -339,7 +339,7 @@ public class AccountOutside {
      *
      * @param company 所属公司
      */
-    public void setCompany(String company) {
+    public void setCompany(Integer company) {
         this.company = company;
     }
 
