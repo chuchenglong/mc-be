@@ -2,6 +2,7 @@ package com.mc.service;
 
 import com.mc.constant.CommConstant;
 import com.mc.constant.TipsConstant;
+import com.mc.enumeration.ConfigCodeEnum;
 import com.mc.enumeration.WhiteTypeEnum;
 import com.mc.mapper.ConfigInfoMapper;
 import com.mc.mapper.WhiteInfoMapper;
@@ -46,7 +47,7 @@ public class RedisService {
     public String resetTokenTimeout(String redisKey) {
         if (StringUtils.isNotEmpty(redisKey)) {
             // 获取token超时时间配置数据
-            String tokenTimeout = valueOperations.get(CommConstant.TOKEN_TIMEOUT);
+            String tokenTimeout = valueOperations.get(ConfigCodeEnum.TOKEN_TIMEOUT.getKey());
             // 如果配置了超时时间，设置超时时间
             if (StringUtils.isNotEmpty(tokenTimeout))
                 redisTemplate.expire(redisKey, Integer.valueOf(tokenTimeout), TimeUnit.SECONDS);

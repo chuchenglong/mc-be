@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public enum BizTypeEnum {
-    MC("bt_100","mc");
+    MC_MANAGER("bt_100","mc-manager"), MC_SHOP("bt_100","mc-shop");
 
     private String key;
     private String value;

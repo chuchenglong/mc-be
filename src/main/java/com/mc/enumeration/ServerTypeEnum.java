@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public enum ServerTypeEnum {
-    TOKEN("st_100","token类"), UN_TOKEN("st_101", "无token类");
+    TOKEN("st_100","内部服务"), UN_TOKEN("st_101", "外部服务");
 
     private String key;
     private String value;

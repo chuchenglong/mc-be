@@ -2,6 +2,7 @@ package com.mc.filter;
 
 import com.mc.constant.CommConstant;
 import com.mc.constant.ThreadLocalConstant;
+import com.mc.enumeration.ConfigCodeEnum;
 import com.mc.enumeration.WhiteTypeEnum;
 import com.mc.mapper.ServerInfoMapper;
 import com.mc.model.ServerInfo;
@@ -59,24 +60,27 @@ public class AuthFilter implements Filter {
         WhiteService whiteService = wac.getBean(WhiteService.class);
         RoleService roleService = wac.getBean(RoleService.class);
 
-        String tokenOnOff = configService.getValueByCode(CommConstant.TOKEN_ON_OFF);
+        String tokenOnOff = configService.getValueByCode(ConfigCodeEnum.TOKEN_ON_OFF.getKey());
+        String serverOnOff = configService.getValueByCode(ConfigCodeEnum.SERVER_ON_OFF.getKey());
 
         String uri = request.getRequestURI();
         String formatUri = StringUtils.formatUri(uri);
 
         // 服务可用性验证
-        ServerInfoMapper serverInfoMapper = wac.getBean(ServerInfoMapper.class);
-        int count = serverInfoMapper.selectNormalServerInfoCountByServerUrl(formatUri);
-        if (count == 0) {
-            response.setStatus(404);
-            return;
+        if (CommConstant.ON.equals(serverOnOff)) {
+            ServerInfoMapper serverInfoMapper = wac.getBean(ServerInfoMapper.class);
+            int count = serverInfoMapper.selectNormalServerInfoCountByServerUrl(formatUri);
+            if (count == 0) {
+                response.setStatus(404);
+                return;
+            }
         }
 
         String token = request.getHeader(CommConstant.HEADER_TOKEN);
         // token验证checkToken
         if (StringUtils.isNotEmpty(tokenOnOff) && CommConstant.ON.equals(tokenOnOff)) {
             // 在白名单里
-            if (whiteService.checkWhiteListByType(formatUri, WhiteTypeEnum.TOKEN_URI.getKey())) {
+            if (whiteService.checkWhiteListByType(formatUri, WhiteTypeEnum.TOKEN.getKey())) {
                 // 如果token不为空，则重置token超时时间
                 if (StringUtils.isNotEmpty(token))
                     redisService.resetTokenTimeout(token);
@@ -97,9 +101,9 @@ public class AuthFilter implements Filter {
                 redisService.resetTokenTimeout(token);
 
                 // 进行服务验证checkService，服务验证需要userId，所以必须基于token验证通过
-                String serviceOnOff = configService.getValueByCode(CommConstant.SERVICE_ON_OFF);
-                if (StringUtils.isNotEmpty(serviceOnOff) && CommConstant.ON.equals(serviceOnOff)
-                        && !whiteService.checkWhiteListByType(uId, WhiteTypeEnum.USER_SERVER.getKey())) {
+                String roleOnOff = configService.getValueByCode(ConfigCodeEnum.ROLE_ON_OFF.getKey());
+                if (StringUtils.isNotEmpty(roleOnOff) && CommConstant.ON.equals(roleOnOff)
+                        && !whiteService.checkWhiteListByType(uId, WhiteTypeEnum.USER.getKey())) {
                     // 数据结构可以支持一人多角色情况，程序目前仅实现一对一，一对多需要在redis里加入role缓存
                     ServerInfo serverInfo = roleService.getServerByUserIdAndUri(userId, formatUri);
                     // 如果没有匹配服务，则该用户无服务权限，给403且终止请求

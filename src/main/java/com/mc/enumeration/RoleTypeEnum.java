@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 public enum  RoleTypeEnum {
-    ADMIN("rt_100","管理员"),ORDINARY("rt_101","普通用户");
+    ADMIN("rt_100","管理员"),
+    ORDINARY("rt_101","普通用户"),
+    OUTSIDE("rt_102","三方用户");
 
     private String key;
     private String value;

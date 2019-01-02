@@ -4,6 +4,7 @@ import com.mc.constant.CommConstant;
 import com.mc.service.FileService;
 import com.mc.system.McBusinessException;
 import com.mc.system.McResult;
+import com.mc.util.AliyunOSSClientUtils;
 import org.apache.poi.POIXMLTextExtractor;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.usermodel.Range;
@@ -40,14 +41,10 @@ public class FileController {
         MultipartFile file = ((MultipartHttpServletRequest)request).getFile("file");
         // 检查文件
         fileService.checkUserImage(file);
-        // 获取待生成文件全路径文件名
-        String fullFilename = fileService.getFullFilename();
-        // 生成文件
-        fileService.singleUploadFile(file, fullFilename);
-        // 获取下载地址
-        String downloadUrl = fileService.getDownloadUrl(fullFilename);
+        //上传文件到阿里云
+        String url = AliyunOSSClientUtils.uploadImage(file);
         // 返回结果
-        return McResult.newSuccess(downloadUrl);
+        return McResult.newSuccess(url);
     }
 
     /**

@@ -72,7 +72,7 @@ public class UserService extends BaseService {
 
         int userId = userInfo.getId();
         int loginWrongTimes = 0;
-        String times = configService.getValueByCode(CommConstant.LOGIN_WRONG_TIMES);
+        String times = configService.getValueByCode(ConfigCodeEnum.LOGIN_WRONG_TIMES.getKey());
         if (StringUtils.isNumber(times))
             loginWrongTimes = Integer.valueOf(times);
         String inPassword = StringUtils.deciphering(loginVo.getPassword());

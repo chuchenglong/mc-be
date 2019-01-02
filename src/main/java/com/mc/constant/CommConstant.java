@@ -12,11 +12,11 @@ public class CommConstant {
     }
 
     // redis and config
-    public static final String TOKEN_TIMEOUT = "token_timeout";
-    public static final String LOGIN_WRONG_TIMES = "login_wrong_times";
-    public static final String SUPPORT_IMAGE_TYPE = "support_image_type";
-    public static final String TOKEN_ON_OFF = "token_on_off";
-    public static final String SERVICE_ON_OFF = "service_on_off";
+//    public static final String TOKEN_TIMEOUT = "token_timeout";
+//    public static final String LOGIN_WRONG_TIMES = "login_wrong_times";
+//    public static final String SUPPORT_IMAGE_TYPE = "support_image_type";
+//    public static final String TOKEN_ON_OFF = "token_on_off";
+//    public static final String SERVICE_ON_OFF = "service_on_off";
     public static final String ON = "on";
     public static final String OFF = "off";
 

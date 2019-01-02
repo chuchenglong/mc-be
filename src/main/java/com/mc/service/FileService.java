@@ -40,28 +40,4 @@ public class FileService extends BaseService {
         }
     }
 
-    public String getFullFilename() {
-        String uploadPath = fileProperties.getUploadPath();
-        // 全路径文件名 = 上传路径 + userId + 时间戳 + 后缀
-        String timestamp = String.valueOf(new Date().getTime());
-        return uploadPath + getLocalUserId() + timestamp + ".jpg";
-    }
-
-    public void singleUploadFile(MultipartFile file, String fullFilename) throws McBusinessException {
-        File dest = new File(fullFilename);
-        try {
-            // 判断文件父目录是否存在, 不存在生成相应目录
-            if(!dest.getParentFile().exists()) {
-                dest.getParentFile().mkdirs();
-            }
-            // 保存文件
-            file.transferTo(dest);
-        } catch (IOException e) {
-            throw new McBusinessException(TipsConstant.FAIL_UPLOAD);
-        }
-    }
-
-    public String getDownloadUrl(String fullFilename) {
-        return fullFilename.replace(fileProperties.getUploadPath(), fileProperties.getDownloadPath());
-    }
 }

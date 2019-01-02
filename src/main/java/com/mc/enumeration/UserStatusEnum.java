@@ -6,7 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 public enum UserStatusEnum {
-    NORMAL("us_100","正常"),LOCK("us_101","锁定"),FREEZE("us_102","冻结"),DORMANT("us_103","休眠");
+    NORMAL("us_100","正常"),
+    LOCK("us_101","锁定"),
+    FREEZE("us_102","冻结"),
+    DORMANT("us_103","休眠"),
+    WAIT_AUTH("us_104","待审核"),;
 
     private String key;
     private String value;

@@ -38,7 +38,7 @@
   <update id="updateUserDetailByUserId" parameterType="com.mc.vo.UserVo">
     update t_user_detail set
       alias = #{alias}, email = #{email}, gender = #{gender}, race = #{race},
-      birth_date = #{birthDate}, nationality = #{nationality}, marital = #{marital}, domicile = #{domicile}, brief = #{brief}
+      birth_date = #{birthDate}, nationality = #{nationality}, marital = #{marital}, domicile = #{domicile}, brief = #{brief}, photo = #{photo}
     where user_id = #{userId}
     <!--<if test="alias != null and alias != '' ">-->
       <!--, alias = #{alias}-->
