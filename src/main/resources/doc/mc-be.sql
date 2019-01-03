@@ -35,7 +35,7 @@ create table t_user_detail (
   gender varchar(10) default null comment '性别，GenderEnum',
   birth_date timestamp null default null comment '出生日期',
   brief varchar(200) default null comment '用户简介',
-  photo varchar(100) default null comment '用户头像',
+  photo varchar(200) default null comment '用户头像',
   marital  varchar(10) default null comment '婚姻状况，MaritalEnum',
   race varchar(10) default null comment '名族，RaceEnum',
   nationality varchar(10) default null comment '国籍，NationalityEnum',
